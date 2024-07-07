@@ -32,7 +32,7 @@ class _YummyAppState extends State<YummyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Yummy App',
       themeMode: themeMode,
       theme: ThemeData(

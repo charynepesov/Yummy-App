@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yummy/models/models.dart';
 
-class RestaurantLandscapeCard extends StatelessWidget {
+class RestaurantLandscapeCard extends StatefulWidget {
   final Restaurant restaurant;
 
   const RestaurantLandscapeCard({
@@ -9,6 +9,13 @@ class RestaurantLandscapeCard extends StatelessWidget {
     required this.restaurant,
   });
 
+  @override
+  State<RestaurantLandscapeCard> createState() => _RestaurantLandscapeCardState();
+}
+
+class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
+  // TODO: Add _isFavorited property
+  bool _isFavorited = false;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context)
@@ -24,23 +31,45 @@ class RestaurantLandscapeCard extends StatelessWidget {
                 const BorderRadius.vertical(top: Radius.circular(8.0)),
             child: AspectRatio(
               aspectRatio: 2,
-              child: Image.asset(
-    restaurant.imageUrl, fit: BoxFit.cover),
+              // TODO: Convert to a stack
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    widget.restaurant.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 4.0,
+                    right: 4.0,
+                    child: IconButton(
+                      icon: Icon(_isFavorited ? Icons.favorite : Icons.favorite_border,),
+                      iconSize: 30.0,
+                      color: Colors.red[400],
+                      onPressed: () {
+                        setState(() {
+                          _isFavorited = !_isFavorited;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
     ),
               ),
 
           ListTile(
             title: Text(
-              restaurant.name,
+              widget.restaurant.name,
               style: textTheme.titleSmall,
             ),
             subtitle: Text(
-              restaurant.attributes,
+              widget.restaurant.attributes,
               maxLines: 1,
               style: textTheme.bodySmall,
             ),
             onTap: () {
-              print('Tapped on ${restaurant.name}');
+              print('Tapped on ${widget.restaurant.name}');
             },
           ),
         ],

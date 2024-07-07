@@ -43,7 +43,7 @@ class CategoryCard extends StatelessWidget {
                   bottom: 16.0,
                   right: 16.0,
                   child: RotatedBox(
-                    quarterTurns: 1,
+                    quarterTurns: 2,
                     child: Text(
                       'Smoothies',
                       style: textTheme.headlineLarge,
